@@ -1,0 +1,254 @@
+[
+    {
+        "id": 1,
+        "category": "MySQL",
+        "question": "Which join returns only matching rows from both tables?",
+        "options": [
+            "LEFT JOIN",
+            "RIGHT JOIN",
+            "INNER JOIN",
+            "CROSS JOIN"
+        ],
+        "answer": "INNER JOIN"
+    },
+    {
+        "id": 2,
+        "category": "MySQL",
+        "question": "What does TRUNCATE TABLE do?",
+        "options": [
+            "Deletes some rows using WHERE",
+            "Deletes all rows and resets auto-increment (where applicable)",
+            "Drops table structure",
+            "Locks table permanently"
+        ],
+        "answer": "Deletes all rows and resets auto-increment (where applicable)"
+    },
+    {
+        "id": 3,
+        "category": "MySQL",
+        "question": "Which statement removes duplicate rows in a SELECT?",
+        "options": [
+            "UNIQUE",
+            "DISTINCT",
+            "DIFFERENT",
+            "NODUP"
+        ],
+        "answer": "DISTINCT"
+    },
+    {
+        "id": 4,
+        "category": "MySQL",
+        "question": "Which operator checks pattern matching?",
+        "options": [
+            "MATCH",
+            "LIKE",
+            "REGEXPONLY",
+            "FIND"
+        ],
+        "answer": "LIKE"
+    },
+    {
+        "id": 5,
+        "category": "UNIX",
+        "question": "What does grep do?",
+        "options": [
+            "Searches for patterns in text",
+            "Copies files",
+            "Edits files",
+            "Changes permissions"
+        ],
+        "answer": "Searches for patterns in text"
+    },
+    {
+        "id": 6,
+        "category": "UNIX",
+        "question": "Which command changes file owner?",
+        "options": [
+            "chown",
+            "chmod",
+            "chgrp",
+            "own"
+        ],
+        "answer": "chown"
+    },
+    {
+        "id": 7,
+        "category": "UNIX",
+        "question": "Which command changes group ownership?",
+        "options": [
+            "chgrp",
+            "chown",
+            "chmod",
+            "group"
+        ],
+        "answer": "chgrp"
+    },
+    {
+        "id": 8,
+        "category": "UNIX",
+        "question": "Which command displays disk usage of filesystem?",
+        "options": [
+            "df",
+            "du",
+            "disk",
+            "usage"
+        ],
+        "answer": "df"
+    },
+    {
+        "id": 9,
+        "category": "UNIX",
+        "question": "Which command displays size of files/directories?",
+        "options": [
+            "du",
+            "df",
+            "lsblk",
+            "statfs"
+        ],
+        "answer": "du"
+    },
+    {
+        "id": 10,
+        "category": "UNIX",
+        "question": "Which command shows lines containing 'error' in app.log?",
+        "options": [
+            "grep error app.log",
+            "find error app.log",
+            "cat error app.log",
+            "ls error app.log"
+        ],
+        "answer": "grep error app.log"
+    },
+    {
+        "id": 11,
+        "category": "UNIX",
+        "question": "Which option makes grep case-insensitive?",
+        "options": [
+            "-i",
+            "-c",
+            "-v",
+            "-n"
+        ],
+        "answer": "-i"
+    },
+    {
+        "id": 12,
+        "category": "UNIX",
+        "question": "Which option prints line numbers in grep output?",
+        "options": [
+            "-n",
+            "-i",
+            "-r",
+            "-w"
+        ],
+        "answer": "-n"
+    },
+    {
+        "id": 13,
+        "category": "UNIX",
+        "question": "Which command displays file type information?",
+        "options": [
+            "file",
+            "type",
+            "stat -t",
+            "ls -t"
+        ],
+        "answer": "file"
+    },
+    {
+        "id": 14,
+        "category": "UNIX",
+        "question": "Which command compares two files line by line?",
+        "options": [
+            "diff",
+            "cmp -h",
+            "compare",
+            "delta"
+        ],
+        "answer": "diff"
+    },
+    {
+        "id": 15,
+        "category": "Python Basic",
+        "question": "Which keyword is used to handle exceptions in Python?",
+        "options": [
+            "try",
+            "catch",
+            "except",
+            "handle"
+        ],
+        "answer": "except"
+    },
+    {
+        "id": 16,
+        "category": "Python Basic",
+        "question": "Which built-in function returns the length of a sequence?",
+        "options": [
+            "len()",
+            "length()",
+            "size()",
+            "count()"
+        ],
+        "answer": "len()"
+    },
+    {
+        "id": 17,
+        "category": "Python Basic",
+        "question": "What is the output of 5 % 3?",
+        "options": [
+            "2",
+            "0",
+            "1",
+            "Error"
+        ],
+        "answer": "2"
+    },
+    {
+        "id": 18,
+        "category": "Python Basic",
+        "question": "What is the output of tuple(\"Geeks\")?",
+        "options": [
+            "('G', 'e', 'e', 'k', 's')",
+            "Error",
+            "Memory Address",
+            "\"Geeks\""
+        ],
+        "answer": "('G', 'e', 'e', 'k', 's')"
+    },
+    {
+        "id": 19,
+        "category": "Python Basic",
+        "question": "What is the output of print(lambda x, y: x + y)?",
+        "options": [
+            "x,y",
+            "0,1",
+            "Function memory address",
+            "Error"
+        ],
+        "answer": "Function memory address"
+    },
+    {
+        "id": 20,
+        "category": "Python Basic",
+        "question": "What is the output of [x*x for x in range(7)]?",
+        "options": [
+            "Error",
+            "[0, 1, 4, 9, 16, 25, 36]",
+            "0",
+            "[0, 1, 2, 3, 4, 5, 6]"
+        ],
+        "answer": "[0, 1, 4, 9, 16, 25, 36]"
+    },
+    {
+        "id": 21,
+        "category": "Python OOPS",
+        "question": "Which decorator defines a class method?",
+        "options": [
+            "@classmethod",
+            "@staticmethod",
+            "@property",
+            "@class"
+        ],
+        "answer": "@classmethod"
+    }
+]
