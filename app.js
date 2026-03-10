@@ -11,6 +11,8 @@ const resultScreen = document.getElementById('result-screen');
 
 const startBtn = document.getElementById('start-btn');
 const restartBtn = document.getElementById('restart-btn');
+const authCodeInput = document.getElementById('auth-code');
+const authError = document.getElementById('auth-error');
 
 const questionText = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
@@ -50,23 +52,32 @@ function shuffleArray(array) {
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
-    
+
     // reset scroll for result screen if needed
-    if(screenId === 'result-screen') {
+    if (screenId === 'result-screen') {
         document.getElementById(screenId).scrollTop = 0;
     }
 }
 
 function startQuiz() {
     if (allQuestions.length === 0) return;
-    
+
+    // Auth Check
+    const code = authCodeInput.value.trim().toLowerCase();
+    if (code !== '555' && code !== 'thank you aniruddha') {
+        authError.innerText = "Incorrect code or phrase.";
+        return;
+    }
+
+    authError.innerText = "";
+
     // Reset state
     currentQuestions = shuffleArray(allQuestions);
     // Shuffle options for each question as well
     currentQuestions.forEach(q => {
         q.shuffledOptions = shuffleArray(q.options);
     });
-    
+
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
@@ -77,19 +88,19 @@ function startQuiz() {
 
 function loadQuestion() {
     const q = currentQuestions[currentQuestionIndex];
-    
+
     // Update UI
     questionText.innerText = q.question;
     categoryBadge.innerText = q.category;
     questionStats.innerText = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
-    
+
     // Update Progress
     const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
     progressFill.style.width = `${progress}%`;
 
     // Clear and render options
     optionsContainer.innerHTML = '';
-    
+
     q.shuffledOptions.forEach(opt => {
         const btn = document.createElement('button');
         btn.classList.add('option-btn');
@@ -101,7 +112,7 @@ function loadQuestion() {
 
 function handleAnswer(selected, correct) {
     const isCorrect = selected === correct;
-    if(isCorrect) score++;
+    if (isCorrect) score++;
 
     userAnswers.push({
         questionObj: currentQuestions[currentQuestionIndex],
@@ -121,7 +132,7 @@ function handleAnswer(selected, correct) {
 
 function endQuiz() {
     progressFill.style.width = '100%';
-    
+
     setTimeout(() => {
         showScreen('result-screen');
         renderResult();
@@ -130,9 +141,9 @@ function endQuiz() {
 
 function renderResult() {
     scoreText.innerText = `${score} / ${currentQuestions.length}`;
-    
+
     reviewContainer.innerHTML = '';
-    
+
     userAnswers.forEach((ans, index) => {
         const item = document.createElement('div');
         item.classList.add('review-item');
@@ -143,7 +154,7 @@ function renderResult() {
         `;
 
         if (ans.isCorrect) {
-             ansHtml += `
+            ansHtml += `
              <div class="review-answer">
                 <span class="ans-label">Your Answer:</span>
                 <span class="correct-ans">${ans.userAnswer} ✓</span>

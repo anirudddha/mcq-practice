@@ -157,6 +157,38 @@ p {
     flex: 1;
 }
 
+.auth-section {
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#auth-code {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+#auth-code:focus {
+    border-color: var(--primary);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.error-msg {
+    color: #fca5a5;
+    font-size: 0.85rem;
+    min-height: 1.2rem;
+}
+
 /* Quiz Screen */
 .quiz-header {
     margin-bottom: 2rem;
