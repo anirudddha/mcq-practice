@@ -16,11 +16,17 @@
             <div class="hero">
                 <h1>Test Your Knowledge</h1>
                 <p>Ready to challenge yourself? Each attempt is randomly shuffled.</p>
-                <div class="auth-section">
-                    <input type="text" id="auth-code" placeholder="Enter 'thank you aniruddha'" autocomplete="off">
-                    <div id="auth-error" class="error-msg"></div>
+                <div class="test-selection">
+                    <select id="test-select" class="test-dropdown">
+                        <option value="questions.json">Test 1 (General)</option>
+                        <option value="prefa.json">Test 2 (Prefa)</option>
+                        <option value="mcq_1.json">Test 3 (MCQ 1)</option>
+                    </select>
                 </div>
-                <button id="start-btn" class="primary-btn">Start Quiz</button>
+                <div class="action-buttons">
+                    <button id="start-btn" class="primary-btn">Start Quiz</button>
+                    <button id="view-btn" class="secondary-btn">View Questions</button>
+                </div>
             </div>
         </div>
 
@@ -62,6 +68,18 @@
             </div>
 
             <button id="restart-btn" class="primary-btn mt-4">Play Again</button>
+        </div>
+
+        <!-- View Screen -->
+        <div id="view-screen" class="screen scrollable">
+            <div class="view-header">
+                <h2>All Questions</h2>
+                <button id="back-btn" class="secondary-btn btn-small">Back to Home</button>
+            </div>
+
+            <div id="all-questions-container" class="all-questions-list">
+                <!-- All questions injected here -->
+            </div>
         </div>
     </div>
 

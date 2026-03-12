@@ -1,0 +1,254 @@
+[
+    {
+        "id": 1,
+        "category": "Python SQLite",
+        "question": "Which code connects to an SQLite database file 'hr.db' in Python?",
+        "options": [
+            "import sqlite3; conn = sqlite3.connect('hr.db')",
+            "from sqlite import connect; conn = connect('hr.db')",
+            "import sqlite3; conn = sqlite3.open('hr.db')",
+            "import sqlite; conn = sqlite.connect('hr.db')",
+            "import sqlite3; conn = sqlite3.Connection('hr.db')"
+        ],
+        "answer": "import sqlite3; conn = sqlite3.connect('hr.db')"
+    },
+    {
+        "id": 2,
+        "category": "Python SQLite",
+        "question": "How do you obtain a cursor and run a SELECT?",
+        "options": [
+            "conn.select('SELECT * FROM emp')",
+            "cursor = sqlite3.cursor(); cursor.execute(SQL)",
+            "cursor = conn.cursor; cursor.exec(SQL)",
+            "with conn as c: c(SQL)",
+            "cur = conn.cursor(); cur.execute('SELECT * FROM emp')"
+        ],
+        "answer": "cur = conn.cursor(); cur.execute('SELECT * FROM emp')"
+    },
+    {
+        "id": 3,
+        "category": "Python",
+        "question": "What is the purpose of the try...except block when interacting with databases in Python?",
+        "options": [
+            "To define a new function",
+            "To handle potential database errors or exceptions",
+            "To loop through query results",
+            "To close the database connection"
+        ],
+        "answer": "To handle potential database errors or exceptions"
+    },
+    {
+        "id": 4,
+        "category": "Python Generators",
+        "question": "What will be the output of the generator snippet using next() twice and list(res)?",
+        "options": [
+            "1 2 [3]",
+            "1 2 3",
+            "1 2 [1,2,3]",
+            "1 2 []"
+        ],
+        "answer": "1 2 [3]"
+    },
+    {
+        "id": 5,
+        "category": "Python OOP",
+        "question": "When a subclass overrides a method from its parent class, which method is executed?",
+        "options": [
+            "speak() from Animal",
+            "speak() from Dog",
+            "Error",
+            "Both methods will be called"
+        ],
+        "answer": "speak() from Dog"
+    },
+    {
+        "id": 6,
+        "category": "Python OOP",
+        "question": "What is the output of the inheritance example using Employee and Trainer classes?",
+        "options": [
+            "Employee Trainer-Python True",
+            "Employee Employee True",
+            "Employee Trainer-Python False",
+            "Employee Error True"
+        ],
+        "answer": "Employee Trainer-Python True"
+    },
+    {
+        "id": 7,
+        "category": "Python Regex",
+        "question": "What will re.findall('ai', 'No pain, no gain') return?",
+        "options": [
+            "['ai', 2]",
+            "2",
+            "['ai', 'ai']",
+            "['ai']"
+        ],
+        "answer": "['ai', 'ai']"
+    },
+    {
+        "id": 8,
+        "category": "Python File Handling",
+        "question": "Which Python method is used to read the entire content of a file?",
+        "options": [
+            "read()",
+            "open()",
+            "load()",
+            "get()"
+        ],
+        "answer": "read()"
+    },
+    {
+        "id": 9,
+        "category": "Python Generators",
+        "question": "What is printed by print(next(g), next(g)) when the generator yields 1 and 2?",
+        "options": [
+            "(1, 2)",
+            "1 2",
+            "[1, 2]",
+            "1, 2",
+            "Error"
+        ],
+        "answer": "1 2"
+    },
+    {
+        "id": 10,
+        "category": "Python List Comprehension",
+        "question": "What is the output of squares = [i**2 for i in range(5)]?",
+        "options": [
+            "[0, 1, 4, 9, 16]",
+            "[1, 2, 3, 4, 5]",
+            "[0, 1, 2, 3, 4]",
+            "[0, 1, 8, 27, 64]"
+        ],
+        "answer": "[0, 1, 4, 9, 16]"
+    },
+    {
+        "id": 11,
+        "category": "Python Collections",
+        "question": "Is OrderedDict mutable in Python?",
+        "options": [
+            "Yes, OrderedDict is mutable",
+            "No, OrderedDict is immutable"
+        ],
+        "answer": "Yes, OrderedDict is mutable"
+    },
+    {
+        "id": 12,
+        "category": "Python Lambda",
+        "question": "What is the output of map(lambda x: x**2, [1,2,3,4,5]) converted to list?",
+        "options": [
+            "[1, 4, 9, 16, 25]",
+            "[1, 2, 3, 4, 5]",
+            "[2, 3, 4, 5, 6]",
+            "[2, 4, 6, 8, 10]"
+        ],
+        "answer": "[1, 4, 9, 16, 25]"
+    },
+    {
+        "id": 13,
+        "category": "Python Collections",
+        "question": "What will print(c) output when using ChainMap(d1, d2, d3)?",
+        "options": [
+            "No output",
+            "Error",
+            "ChainMap({'a': 1, 'b': 2}, {'c': 3, 'd': 4}, {'e': 5, 'f': 6})",
+            "ChainMap({'a': 3, 'b': 1}, {'c': 4, 'd': 2}, {'e': 6, 'f': 5})"
+        ],
+        "answer": "ChainMap({'a': 1, 'b': 2}, {'c': 3, 'd': 4}, {'e': 5, 'f': 6})"
+    },
+    {
+        "id": 14,
+        "category": "Python String",
+        "question": "What is the output of '-'.join(['Hello','Python'])?",
+        "options": [
+            "HelloPython-",
+            "Hello-Python",
+            "-HelloPython"
+        ],
+        "answer": "Hello-Python"
+    },
+    {
+        "id": 15,
+        "category": "SQLite",
+        "question": "SQLite3 is a serverless database. True or False?",
+        "options": [
+            "TRUE",
+            "FALSE"
+        ],
+        "answer": "TRUE"
+    },
+    {
+        "id": 16,
+        "category": "Python SQLite",
+        "question": "Which parameter placeholder style is correct for sqlite3 in Python?",
+        "options": [
+            "Named only :name",
+            "Question marks ?",
+            "Percent formatting %s",
+            "$1 like PostgreSQL",
+            "Braces {}"
+        ],
+        "answer": "Question marks ?"
+    },
+    {
+        "id": 17,
+        "category": "Python Decorators",
+        "question": "What does a Python decorator do?",
+        "options": [
+            "Adds comments to a function",
+            "Extends the behavior of a function",
+            "Creates new functions",
+            "Removes a function's arguments"
+        ],
+        "answer": "Extends the behavior of a function"
+    },
+    {
+        "id": 18,
+        "category": "Python Collections",
+        "question": "How can you create a named tuple in Python?",
+        "options": [
+            "collections.namedtuple('Point', ['x','y'])",
+            "collections.namedtuple('Point', x, y)",
+            "namedtuple('Point', [x, y])",
+            "namedtuple('Point', x, y)"
+        ],
+        "answer": "collections.namedtuple('Point', ['x','y'])"
+    },
+    {
+        "id": 19,
+        "category": "Python OOP",
+        "question": "Which demonstrates polymorphism?",
+        "options": [
+            "Using private variables",
+            "Different classes having methods with the same name but different implementations",
+            "Creating multiple objects of the same class",
+            "Using decorators"
+        ],
+        "answer": "Different classes having methods with the same name but different implementations"
+    },
+    {
+        "id": 20,
+        "category": "Python OOP",
+        "question": "What is the output of the Vehicle and Car inheritance example?",
+        "options": [
+            "Brand: Mahindra",
+            "Brand: Mahindra, Model: Thar",
+            "Error",
+            "Model: Thar"
+        ],
+        "answer": "Brand: Mahindra, Model: Thar"
+    },
+    {
+        "id": 21,
+        "category": "Python Iterators",
+        "question": "To make a class iterable, which should be implemented?",
+        "options": [
+            "__next__ only",
+            "__getitem__ only",
+            "__iter__ (and iterator supports __next__)",
+            "__call__",
+            "__contains__ only"
+        ],
+        "answer": "__iter__ (and iterator supports __next__)"
+    }
+]

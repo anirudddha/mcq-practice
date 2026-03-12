@@ -8,11 +8,13 @@ let userAnswers = []; // Store { question, userAnswer, isCorrect, correctAnswer 
 const startScreen = document.getElementById('start-screen');
 const quizScreen = document.getElementById('quiz-screen');
 const resultScreen = document.getElementById('result-screen');
+const viewScreen = document.getElementById('view-screen');
 
 const startBtn = document.getElementById('start-btn');
+const viewBtn = document.getElementById('view-btn');
 const restartBtn = document.getElementById('restart-btn');
-const authCodeInput = document.getElementById('auth-code');
-const authError = document.getElementById('auth-error');
+const backBtn = document.getElementById('back-btn');
+const testSelect = document.getElementById('test-select');
 
 const questionText = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
@@ -22,21 +24,30 @@ const categoryBadge = document.getElementById('category-badge');
 
 const scoreText = document.getElementById('score-text');
 const reviewContainer = document.getElementById('review-container');
+const allQuestionsContainer = document.getElementById('all-questions-container');
 
 // Initialization
-async function init() {
-    try {
-        const response = await fetch('questions.json');
-        allQuestions = await response.json();
-    } catch (error) {
-        console.error("Error loading questions:", error);
-        questionText.innerText = "Failed to load questions.";
-    }
+function init() {
+    startBtn.addEventListener('click', () => handleStartAction('quiz'));
+    viewBtn.addEventListener('click', () => handleStartAction('view'));
 
-    startBtn.addEventListener('click', startQuiz);
     restartBtn.addEventListener('click', () => {
         showScreen('start-screen');
     });
+    backBtn.addEventListener('click', () => {
+        showScreen('start-screen');
+    });
+}
+
+async function fetchQuestions() {
+    try {
+        const file = testSelect.value;
+        const response = await fetch(file);
+        allQuestions = await response.json();
+    } catch (error) {
+        console.error("Error loading questions:", error);
+        alert("Failed to load questions from selected file.");
+    }
 }
 
 // Utility: Fisher-Yates Shuffle
@@ -59,17 +70,21 @@ function showScreen(screenId) {
     }
 }
 
-function startQuiz() {
+async function handleStartAction(actionType) {
+    // Fetch newly selected file
+    await fetchQuestions();
+
     if (allQuestions.length === 0) return;
 
-    // Auth Check
-    const code = authCodeInput.value.trim().toLowerCase();
-    if (code !== '555' && code !== 'thank you aniruddha') {
-        authError.innerText = "Incorrect code or phrase.";
-        return;
+    if (actionType === 'quiz') {
+        startQuiz();
+    } else if (actionType === 'view') {
+        startViewAll();
     }
+}
 
-    authError.innerText = "";
+function startQuiz() {
+    if (allQuestions.length === 0) return;
 
     // Reset state
     currentQuestions = shuffleArray(allQuestions);
@@ -175,6 +190,40 @@ function renderResult() {
 
         item.innerHTML = ansHtml;
         reviewContainer.appendChild(item);
+    });
+}
+
+function startViewAll() {
+    currentQuestions = allQuestions; // No shuffle for viewer
+    showScreen('view-screen');
+    renderViewAll();
+}
+
+function renderViewAll() {
+    allQuestionsContainer.innerHTML = '';
+
+    currentQuestions.forEach((q, index) => {
+        const block = document.createElement('div');
+        block.classList.add('view-q-block');
+
+        let html = `
+            <div class="view-q-text">
+                <span style="flex:1;">${index + 1}. ${q.question}</span>
+                <span class="badge" style="white-space: nowrap;">${q.category}</span>
+            </div>
+            <div class="view-options">
+        `;
+
+        q.options.forEach(opt => {
+            const isAns = opt === q.answer;
+            const cls = isAns ? 'view-opt is-answer' : 'view-opt';
+            const icon = isAns ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : '';
+            html += `<div class="${cls}"><span>${opt}</span>${icon}</div>`;
+        });
+
+        html += `</div>`;
+        block.innerHTML = html;
+        allQuestionsContainer.appendChild(block);
     });
 }
 
