@@ -1,0 +1,271 @@
+[
+    {
+        "id": "RPROG_ASCEND_4",
+        "category": "R Programming",
+        "question": "What is the output of A <- matrix(1:6,2,3); print(A)?",
+        "options": [
+            "[1,] 1 3 5 [2,] 2 4 6",
+            "[1,] 1 2 3 [2,] 4 5 6"
+        ],
+        "answer": "[1,] 1 3 5 [2,] 2 4 6"
+    },
+    {
+        "id": "RPROG_ASCEND_5",
+        "category": "R Programming",
+        "question": "What is the output of A <- list(1,6,2,3); print(length(A))?",
+        "options": [
+            "6",
+            "3",
+            "8"
+        ],
+        "answer": "4"
+    },
+    {
+        "id": "RPROG_ASCEND_6",
+        "category": "R Programming",
+        "question": "What is the output of substr('Learn R programming', 1, 1)?",
+        "options": [
+            "L",
+            "Learn",
+            "code",
+            "Error"
+        ],
+        "answer": "L"
+    },
+    {
+        "id": "RPROG_ASCEND_7",
+        "category": "R Programming",
+        "question": "What is the output of nlevels(factor(c('very low','low','medium','high','very high')))?",
+        "options": [
+            "3",
+            "5",
+            "4"
+        ],
+        "answer": "5"
+    },
+    {
+        "id": "RPROG_ASCEND_8",
+        "category": "R Programming",
+        "question": "What is the output of matrix(seq(9,14),2,2) then as.vector?",
+        "options": [
+            "9 10 11 12",
+            "9 11 10 12",
+            "Matrix cannot be converted",
+            "NaN"
+        ],
+        "answer": "9 11 10 12"
+    },
+    {
+        "id": "RPROG_ASCEND_9",
+        "category": "R Programming",
+        "question": "What is the output of round(32.7654, digits=-3)?",
+        "options": [
+            "NULL",
+            "NA",
+            "ERROR",
+            "NaN"
+        ],
+        "answer": "ERROR"
+    },
+    {
+        "id": "RPROG_ASCEND_10",
+        "category": "R Programming",
+        "question": "What is the output of x <- c(7,9,4,2,7); x[x>5]?",
+        "options": [
+            "797",
+            "TRUE TRUE FALSE FALSE TRUE",
+            "TRUE",
+            "FALSE"
+        ],
+        "answer": "797"
+    },
+    {
+        "id": "RPROG_ASCEND_11",
+        "category": "R Programming",
+        "question": "What is the output of v1 <- c(1:4); v2 <- c(11:14); v1+v2?",
+        "options": [
+            "Syntax Error",
+            "60",
+            "12 14 16 18"
+        ],
+        "answer": "12 14 16 18"
+    },
+    {
+        "id": "RPROG_ASCEND_12",
+        "category": "R Programming",
+        "question": "What is the output of matrix(seq(9,14),2,2) and convert to vector?",
+        "options": [
+            "9 10 11 12",
+            "9 11 10 12",
+            "Error",
+            "NaN"
+        ],
+        "answer": "9 11 10 12"
+    },
+    {
+        "id": "RPROG_ASCEND_13",
+        "category": "R Programming",
+        "question": "What is the output of z1=10+3i, z2=3+5i, z3=z1+z2+(2+3*5^2)?",
+        "options": [
+            "90+8i",
+            "638+8i",
+            "638",
+            "646"
+        ],
+        "answer": "90+8i"
+    },
+    {
+        "id": "RPROG_ASCEND_14",
+        "category": "R Programming",
+        "question": "What is the output of type conversions on z1=10+3i?",
+        "options": [
+            "numeric",
+            "double",
+            "ERROR",
+            "character"
+        ],
+        "answer": "ERROR"
+    },
+    {
+        "id": "RPROG_ASCEND_15",
+        "category": "R Programming",
+        "question": "What is the output of x=1:10, y=seq(1,20,2), x%*%y?",
+        "options": [
+            "list of products",
+            "ERROR",
+            "715",
+            "sequence"
+        ],
+        "answer": "715"
+    },
+    {
+        "id": "RPROG_ASCEND_16",
+        "category": "R Programming",
+        "question": "Matrix rbind and cbind dimension result?",
+        "options": [
+            "3 4",
+            "4 3",
+            "2 3",
+            "3 2"
+        ],
+        "answer": "3 4"
+    },
+    {
+        "id": "RPROG_ASCEND_17",
+        "category": "R Programming",
+        "question": "Matrix indexing with invalid row X[4:3,2:3]?",
+        "options": [
+            "1",
+            "ERROR",
+            "2 1"
+        ],
+        "answer": "ERROR"
+    },
+    {
+        "id": "RPROG_ASCEND_18",
+        "category": "R Programming",
+        "question": "List matrix indexing new_list[[3]][2,2]?",
+        "options": [
+            "4",
+            "2 4 3 5",
+            "5",
+            "2 3 4 5"
+        ],
+        "answer": "5"
+    },
+    {
+        "id": "RPROG_ASCEND_19",
+        "category": "R Programming",
+        "question": "If else condition with x=0?",
+        "options": [
+            "X is positive",
+            "X is negative",
+            "No output",
+            "ERROR"
+        ],
+        "answer": "X is negative"
+    },
+    {
+        "id": "RPROG_ASCEND_22",
+        "category": "R Programming",
+        "question": "Removing mpg column from mtcars?",
+        "options": [
+            "32 obs of 11 variables",
+            "32 obs of 10 variables",
+            "31 obs of 11 variables",
+            "31 obs of 10 variables"
+        ],
+        "answer": "32 obs of 10 variables"
+    },
+    {
+        "id": "RPROG_ASCEND_24",
+        "category": "R Programming",
+        "question": "Vector indexing X[c(1:2,4:5)]?",
+        "options": [
+            "94277",
+            "7927",
+            "79427",
+            "ERROR"
+        ],
+        "answer": "7927"
+    },
+    {
+        "id": "RPROG_ASCEND_25",
+        "category": "R Programming",
+        "question": "Length and NA addition?",
+        "options": [
+            "6 and 15 16 12 NA 24 NA",
+            "4 and values",
+            "6 and no NA",
+            "4 and no NA"
+        ],
+        "answer": "6 and 15 16 12 NA 24 NA"
+    },
+    {
+        "id": "RPROG_ASCEND_27",
+        "category": "R Programming",
+        "question": "ifelse with marks=40?",
+        "options": [
+            "FAIL",
+            "PASS",
+            "ERROR"
+        ],
+        "answer": "PASS"
+    },
+    {
+        "id": "RPROG_ASCEND_28",
+        "category": "R Programming",
+        "question": "while loop with condition 0?",
+        "options": [
+            "1",
+            "4",
+            "0",
+            "3"
+        ],
+        "answer": "0"
+    },
+    {
+        "id": "RPROG_ASCEND_29",
+        "category": "R Programming",
+        "question": "for loop with next and break?",
+        "options": [
+            "1 and 2",
+            "1 2 5 6 7",
+            "1 to 7",
+            "3 and 4"
+        ],
+        "answer": "1 and 2"
+    },
+    {
+        "id": "RPROG_ASCEND_30",
+        "category": "R Programming",
+        "question": "What is the output of apply(matrix(1:6, 2, 3), 1, sum)?",
+        "options": [
+            "6 15",
+            "9 12",
+            "3 7 11",
+            "Error"
+        ],
+        "answer": "9 12"
+    }
+]
