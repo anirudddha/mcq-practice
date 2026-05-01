@@ -16,6 +16,31 @@ const restartBtn = document.getElementById('restart-btn');
 const backBtn = document.getElementById('back-btn');
 const testSelect = document.getElementById('test-select');
 
+const codingPracticeBtn = document.getElementById('coding-practice-btn');
+const codingScreen = document.getElementById('coding-screen');
+const codingBackBtn = document.getElementById('coding-back-btn');
+const languageSelect = document.getElementById('language-select');
+const questionSelect = document.getElementById('question-select');
+const runCodeBtn = document.getElementById('run-code-btn');
+let allCodingQuestions = [];
+const codingDifficulty = document.getElementById('coding-difficulty');
+const codingDescription = document.getElementById('coding-description');
+const codingOutputTerminal = document.getElementById('coding-output-terminal');
+const codeEditorTextarea = document.getElementById('code-editor');
+let codeMirrorEditor = null;
+let currentCodingQuestion = null;
+
+let pyodideInstance = null;
+
+async function initPyodide() {
+    if (!pyodideInstance) {
+        codingOutputTerminal.innerText = "Downloading Python engine (this takes a few seconds the first time)...\n";
+        codingOutputTerminal.className = "terminal-box";
+        pyodideInstance = await loadPyodide();
+        codingOutputTerminal.innerText = "Python engine ready!\n";
+    }
+}
+
 const questionText = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
 const progressFill = document.getElementById('progress-fill');
@@ -30,6 +55,28 @@ const allQuestionsContainer = document.getElementById('all-questions-container')
 function init() {
     startBtn.addEventListener('click', () => handleStartAction('quiz'));
     viewBtn.addEventListener('click', () => handleStartAction('view'));
+    if (codingPracticeBtn) codingPracticeBtn.addEventListener('click', startCodingPractice);
+    if (codingBackBtn) codingBackBtn.addEventListener('click', () => showScreen('start-screen'));
+    
+    if (languageSelect) {
+        languageSelect.addEventListener('change', () => {
+            if(currentCodingQuestion) {
+                const lang = languageSelect.value;
+                setEditorMode(lang);
+                codeMirrorEditor.setValue(currentCodingQuestion.starterCode[lang] || "");
+            }
+        });
+    }
+
+    if (questionSelect) {
+        questionSelect.addEventListener('change', () => {
+            const index = parseInt(questionSelect.value);
+            currentCodingQuestion = allCodingQuestions[index];
+            setupCodingScreen();
+        });
+    }
+
+    if (runCodeBtn) runCodeBtn.addEventListener('click', runCode);
 
     restartBtn.addEventListener('click', () => {
         showScreen('start-screen');
@@ -63,6 +110,15 @@ function shuffleArray(array) {
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
+
+    const appContainer = document.querySelector('.app-container');
+    if (appContainer) {
+        if (screenId === 'coding-screen') {
+            appContainer.classList.add('coding-mode');
+        } else {
+            appContainer.classList.remove('coding-mode');
+        }
+    }
 
     // reset scroll for result screen if needed
     if (screenId === 'result-screen') {
@@ -225,6 +281,167 @@ function renderViewAll() {
         block.innerHTML = html;
         allQuestionsContainer.appendChild(block);
     });
+}
+
+async function startCodingPractice() {
+    try {
+        const response = await fetch('coding_questions.json');
+        allCodingQuestions = await response.json();
+        if(allCodingQuestions.length > 0) {
+            if (questionSelect) {
+                questionSelect.innerHTML = '';
+                allCodingQuestions.forEach((q, index) => {
+                    const opt = document.createElement('option');
+                    opt.value = index;
+                    opt.innerText = q.title;
+                    questionSelect.appendChild(opt);
+                });
+                questionSelect.value = 0;
+            }
+            
+            currentCodingQuestion = allCodingQuestions[0];
+            showScreen('coding-screen');
+            setupCodingScreen();
+        }
+    } catch (e) {
+        console.error("Failed to load coding questions", e);
+        alert("Failed to load coding questions.");
+    }
+}
+
+function setupCodingScreen() {
+    codingDifficulty.innerText = currentCodingQuestion.difficulty;
+    codingDescription.innerText = currentCodingQuestion.description;
+    codingOutputTerminal.innerText = "Ready to run...";
+    codingOutputTerminal.className = "terminal-box";
+
+    if (!codeMirrorEditor) {
+        codeMirrorEditor = CodeMirror.fromTextArea(codeEditorTextarea, {
+            lineNumbers: true,
+            theme: 'dracula',
+            mode: 'python',
+            indentUnit: 4,
+            matchBrackets: true
+        });
+    }
+    
+    // Force refresh to fix layout issues when initializing in a hidden div
+    setTimeout(() => codeMirrorEditor.refresh(), 50);
+    
+    languageSelect.value = "python3";
+    setEditorMode("python3");
+    codeMirrorEditor.setValue(currentCodingQuestion.starterCode["python3"]);
+}
+
+function setEditorMode(lang) {
+    if(lang === 'python3') codeMirrorEditor.setOption("mode", "python");
+    else if(lang === 'javascript') codeMirrorEditor.setOption("mode", "javascript");
+}
+
+async function runCode() {
+    runCodeBtn.disabled = true;
+    runCodeBtn.innerText = "Running...";
+    codingOutputTerminal.className = "terminal-box";
+
+    const code = codeMirrorEditor.getValue();
+    const language = languageSelect.value;
+
+    let passedAll = true;
+    let outputText = "";
+
+    if (language === 'python3') {
+        try {
+            await initPyodide();
+        } catch (e) {
+            codingOutputTerminal.innerText = "Failed to load Python engine.\n" + e.message;
+            codingOutputTerminal.className = "terminal-box error";
+            runCodeBtn.disabled = false;
+            runCodeBtn.innerText = "Run Code";
+            return;
+        }
+    }
+
+    for (let i = 0; i < currentCodingQuestion.testCases.length; i++) {
+        const tc = currentCodingQuestion.testCases[i];
+        
+        try {
+            let resultOutput = "";
+            let resultError = null;
+            
+            if (language === 'python3') {
+                try {
+                    // Inject input securely
+                    pyodideInstance.globals.set("test_input", tc.input);
+                    
+                    pyodideInstance.runPython(`
+import sys
+import io
+sys.stdin = io.StringIO(test_input)
+sys.stdout = io.StringIO()
+sys.stderr = io.StringIO()
+                    `);
+                    
+                    // Run user code
+                    pyodideInstance.runPython(code);
+                    
+                    resultOutput = pyodideInstance.runPython(`sys.stdout.getvalue()`);
+                    const pyStderr = pyodideInstance.runPython(`sys.stderr.getvalue()`);
+                    if (pyStderr) resultError = pyStderr;
+                    
+                } catch (err) {
+                    resultError = err.message;
+                }
+            } else if (language === 'javascript') {
+                let outputBuffer = "";
+                const mockConsole = {
+                    log: (...args) => {
+                        outputBuffer += args.join(" ") + "\n";
+                    }
+                };
+                
+                try {
+                    // Create isolated function environment
+                    const runJS = new Function('input', 'console', code);
+                    runJS(tc.input, mockConsole);
+                    resultOutput = outputBuffer;
+                } catch (err) {
+                    resultError = err.message;
+                }
+            }
+
+            if (resultError) {
+                outputText += `Test Case ${i+1}: ✗ Error\n${resultError}\n\n`;
+                passedAll = false;
+                break;
+            }
+
+            const actualOutput = resultOutput ? resultOutput.trim() : "";
+            const expectedOutput = tc.expectedOutput ? tc.expectedOutput.trim() : "";
+
+            if (actualOutput === expectedOutput) {
+                outputText += `Test Case ${i+1}: ✓ Passed\n`;
+            } else {
+                outputText += `Test Case ${i+1}: ✗ Failed\nExpected:\n${expectedOutput}\nActual:\n${actualOutput}\n\n`;
+                passedAll = false;
+            }
+            
+        } catch (e) {
+            outputText += `Test Case ${i+1}: ✗ Execution Error\n${e.message}\n\n`;
+            passedAll = false;
+            break;
+        }
+    }
+
+    if (passedAll) {
+        outputText += "\n✨ ALL TEST CASES PASSED! ✨";
+        codingOutputTerminal.className = "terminal-box";
+    } else {
+        codingOutputTerminal.className = "terminal-box error";
+    }
+
+    codingOutputTerminal.innerText = outputText;
+    runCodeBtn.disabled = false;
+    runCodeBtn.innerText = "Run Code";
 }
 
 // Start app

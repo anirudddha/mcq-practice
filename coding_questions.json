@@ -1,0 +1,502 @@
+[
+  {
+    "id": 1,
+    "title": "Two Sum",
+    "description": "Problem Statement:\nGiven an array of integers, print the indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nInput Format:\nLine 1: A comma-separated list of array integers\nLine 2: The target integer\n\nOutput Format:\nPrint the two indices separated by a comma.\n\nConstraints:\n- 2 <= length of array <= 10^4\n- -10^9 <= array[i] <= 10^9\n\nSample Input:\n2,7,11,15\n9\n\nSample Output:\n0,1\n\nExplanation:\nBecause array[0] + array[1] == 2 + 7 == 9, we return 0,1.",
+    "difficulty": "Easy",
+    "starterCode": {
+      "python3": "def two_sum(nums, target):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        nums = [int(x.strip()) for x in lines[0].split(',')]\n        target = int(lines[1].strip())\n        result = two_sum(nums, target)\n        if result:\n            print(f\"{result[0]},{result[1]}\")\n",
+      "javascript": "function twoSum(nums, target) {\n    // Write your code here\n    return [];\n}\n\n// --- System Code (Do not modify) ---\nconst lines = input.split('\\n');\nif (lines.length >= 2) {\n    const nums = lines[0].split(',').map(Number);\n    const target = Number(lines[1]);\n    const result = twoSum(nums, target);\n    if (result && result.length === 2) {\n        console.log(result[0] + \",\" + result[1]);\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "2,7,11,15\n9",
+        "expectedOutput": "0,1\n"
+      },
+      {
+        "input": "3,2,4\n6",
+        "expectedOutput": "1,2\n"
+      },
+      {
+        "input": "3,3\n6",
+        "expectedOutput": "0,1\n"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Maximum Occurring Character",
+    "description": "Problem Statement:\nThe goal is to find the character that appears most frequently in a string containing letters and digits.\n\nInput Format:\nA single string text containing letters (a-z, A-Z) and digits (0-9).\n\nOutput Format:\nPrint the character that appears most frequently. Case-sensitive. Tie-breaker goes to the character that appears first in the string.\n\nConstraints:\n- 10 <= length of text <= 10^4\n\nSample Input:\n1223334444\n\nSample Output:\n4\n\nExplanation:\nThe character '4' appears 4 times, which is more than any other character.",
+    "difficulty": "Easy",
+    "starterCode": {
+      "python3": "def maximum_occurring_character(text):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    text = sys.stdin.read().strip()\n    if text:\n        result = maximum_occurring_character(text)\n        print(result)\n",
+      "javascript": "function maximumOccurringCharacter(text) {\n    // Write your code here\n    return '';\n}\n\n// --- System Code (Do not modify) ---\nif (input) {\n    const result = maximumOccurringCharacter(input.trim());\n    console.log(result);\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "1223334444",
+        "expectedOutput": "4"
+      },
+      {
+        "input": "abcABCabc",
+        "expectedOutput": "a"
+      },
+      {
+        "input": "Apple11111",
+        "expectedOutput": "1"
+      },
+      {
+        "input": "AaAaAaAaAa",
+        "expectedOutput": "A"
+      },
+      {
+        "input": "Standard10",
+        "expectedOutput": "a"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Hidden Chip Detection",
+    "description": "Problem Statement:\nDetermine the maximum number of pairs you can form where a smaller chip is \"hidden\" inside a larger one, based on a specific scaling factor k. A smaller chip (side length S) can be hidden inside a larger chip (side length L) if: L >= k * S. Each chip can only be used once in a pair.\n\nInput Format:\nLine 1: Comma-separated chip side lengths\nLine 2: The factor k\n\nOutput Format:\nPrint the maximum number of hidden chips (pairs).\n\nSample Input:\n4,2,6,14\n3\n\nSample Output:\n2\n\nExplanation:\nSorted: [2, 4, 6, 14]. Chip 2 fits in 6 (6 >= 3 * 2); Chip 4 fits in 14 (14 >= 3 * 4). Total pairs = 2.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def get_max_hidden_chips(image_dim, k):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        image_dim = [int(x.strip()) for x in lines[0].split(',') if x.strip()]\n        k = int(lines[1].strip())\n        result = get_max_hidden_chips(image_dim, k)\n        print(result)\n",
+      "javascript": "function getMaxHiddenChips(imageDim, k) {\n    // Write your code here\n    return 0;\n}\n\n// --- System Code (Do not modify) ---\nconst lines = input.split('\\n');\nif (lines.length >= 2) {\n    const imageDim = lines[0].split(',').filter(x => x.trim() !== '').map(Number);\n    const k = Number(lines[1]);\n    const result = getMaxHiddenChips(imageDim, k);\n    console.log(result);\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "4,2,6,14\n3",
+        "expectedOutput": "2"
+      },
+      {
+        "input": "1,2,3,4\n2",
+        "expectedOutput": "2"
+      },
+      {
+        "input": "1,10,100\n20",
+        "expectedOutput": "1"
+      },
+      {
+        "input": "1,1,1,1\n2",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "10,2,5,20,1\n2",
+        "expectedOutput": "2"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Minimum Moves",
+    "description": "Problem Statement:\nCalculate the total moves needed to transform one set of numbers into another by manipulating individual digits. A single move is incrementing or decrementing one digit of an element by 1. Digits cannot be reordered. Corresponding pairs will always have the same number of digits.\n\nInput Format:\nLine 1: Comma-separated elements of arr1\nLine 2: Comma-separated elements of arr2\n\nOutput Format:\nPrint the total minimum moves.\n\nSample Input:\n123,543\n321,279\n\nSample Output:\n16\n\nExplanation:\n123 -> 321 requires 4 moves. 543 -> 279 requires 12 moves. Total = 16 moves.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def minimum_moves(arr1, arr2):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        arr1 = [int(x.strip()) for x in lines[0].split(',') if x.strip()]\n        arr2 = [int(x.strip()) for x in lines[1].split(',') if x.strip()]\n        result = minimum_moves(arr1, arr2)\n        print(result)\n",
+      "javascript": "function minimumMoves(arr1, arr2) {\n    // Write your code here\n    return 0;\n}\n\n// --- System Code (Do not modify) ---\nconst lines = input.split('\\n');\nif (lines.length >= 2) {\n    const arr1 = lines[0].split(',').filter(x => x.trim() !== '').map(Number);\n    const arr2 = lines[1].split(',').filter(x => x.trim() !== '').map(Number);\n    const result = minimumMoves(arr1, arr2);\n    console.log(result);\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "123,543\n321,279",
+        "expectedOutput": "16"
+      },
+      {
+        "input": "1234,4321\n2345,3214",
+        "expectedOutput": "10"
+      },
+      {
+        "input": "1,1,1\n9,9,9",
+        "expectedOutput": "24"
+      },
+      {
+        "input": "101\n101",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "55\n11",
+        "expectedOutput": "8"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Positive Prefixes",
+    "description": "Problem Statement:\nRearrange an array of integers to maximize the number of positive prefix sums. A prefix sum at any index i is the total sum of all elements from the start of the array up to that index.\n\nInput Format:\nA single line containing a comma-separated list of integers.\n\nOutput Format:\nPrint the maximum possible number of strictly positive prefix sums.\n\nConstraints:\n- 1 <= size of arr <= 10^5\n- -10^9 <= arr[i] <= 10^9\n\nSample Input:\n-6,3,4,-10\n\nSample Output:\n3\n\nExplanation:\nThe optimal arrangement is [4, 3, -6, -10]. The prefix sums are 4, 7, 1, -9. There are 3 positive prefix sums.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def max_pos_prefixes(arr):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    text = sys.stdin.read().strip()\n    if text:\n        arr = [int(x.strip()) for x in text.split(',') if x.strip()]\n        result = max_pos_prefixes(arr)\n        print(result)\n",
+      "javascript": "function maxPosPrefixes(arr) {\n    // Write your code here\n    return 0;\n}\n\n// --- System Code (Do not modify) ---\nif (input && input.trim() !== '') {\n    const arr = input.split(',').filter(x => x.trim() !== '').map(Number);\n    const result = maxPosPrefixes(arr);\n    console.log(result);\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "-6,3,4,-10",
+        "expectedOutput": "3"
+      },
+      {
+        "input": "10,-5,-5,10",
+        "expectedOutput": "4"
+      },
+      {
+        "input": "-1,-2,-3",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "5,-2,1",
+        "expectedOutput": "3"
+      },
+      {
+        "input": "0,0,5,-1",
+        "expectedOutput": "4"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Women in Tech (Bit-Flip Minimization)",
+    "description": "Problem Statement:\nGiven an array of n integers, make all elements equal using the minimum number of bit-flips. A bit-flip changes a 0 to 1 or a 1 to 0.\n\nInput Format:\nA single line of comma-separated integers.\n\nOutput Format:\nThe minimum number of flips required across all bit positions.\n\nSample Input:\n1, 2\n\nSample Output:\n2\n\nExplanation:\n1 is 01, 2 is 10. Flip bit 0 of 1 and bit 1 of 2 to get 3 (11). Two flips are needed.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def get_min_operations(arr):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    text = sys.stdin.read().strip()\n    if text:\n        arr = [int(x.strip()) for x in text.split(',')]\n        print(get_min_operations(arr))\n",
+      "javascript": "function getMinOperations(arr) {\n    // Write your code here\n    return 0;\n}\n\n// --- System Code (Do not modify) ---\nif (input && input.trim() !== '') {\n    const arr = input.split(',').map(Number);\n    console.log(getMinOperations(arr));\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "1,2",
+        "expectedOutput": "2"
+      },
+      {
+        "input": "0,7",
+        "expectedOutput": "3"
+      },
+      {
+        "input": "1,1,1",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "1,2,3",
+        "expectedOutput": "2"
+      },
+      {
+        "input": "15,15,0,0",
+        "expectedOutput": "8"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Substring Search (Unique Characters)",
+    "description": "Problem Statement:\nCount how many substrings of a given string s contain no repeating characters. A substring is a contiguous part of the string.\n\nInput Format:\nA single string s.\n\nOutput Format:\nThe total number of unique substrings without repeating characters.\n\nSample Input:\nabac\n\nSample Output:\n8\n\nExplanation:\nThe valid substrings are: a, b, a, c, ab, ba, ac, bac.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def find_substrings(s):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    s = sys.stdin.read().strip()\n    print(find_substrings(s))\n",
+      "javascript": "function findSubstrings(s) {\n    // Write your code here\n    return 0;\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input !== null) {\n    console.log(findSubstrings(input.trim()));\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "abac",
+        "expectedOutput": "8"
+      },
+      {
+        "input": "aaaa",
+        "expectedOutput": "4"
+      },
+      {
+        "input": "abc",
+        "expectedOutput": "6"
+      },
+      {
+        "input": "pwwkew",
+        "expectedOutput": "18"
+      },
+      {
+        "input": "abcdef",
+        "expectedOutput": "21"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Reconstruct 2D Array",
+    "description": "Problem Statement:\nGiven a 1D array where the first element is the number of columns n, reconstruct a 2D array and return the values at specific 1-indexed (row, col) coordinates.\n\nInput Format:\nLine 1: 1D array where the first element is the number of columns n.\nLines 2 to N: Comma-separated row,col pairs for queries.\n\nOutput Format:\nComma-separated results for each query.\n\nSample Input:\n5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n1,1\n1,2\n2,1\n2,2\n\nSample Output:\n1,2,6,7\n\nExplanation:\nThe 2D array has 5 columns. (1,1) is 1, (1,2) is 2, (2,1) is 6, (2,2) is 7.",
+    "difficulty": "Easy",
+    "starterCode": {
+      "python3": "def get_elements(arr, queries):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        arr = [int(x.strip()) for x in lines[0].split(',')]\n        queries = []\n        for line in lines[1:]:\n            if line.strip():\n                queries.append([int(x.strip()) for x in line.split(',')])\n        res = get_elements(arr, queries)\n        print(','.join(map(str, res)))\n",
+      "javascript": "function getElements(arr, queries) {\n    // Write your code here\n    return [];\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input !== null) {\n    const lines = input.split('\\n').filter(l => l.trim() !== '');\n    if (lines.length >= 2) {\n        const arr = lines[0].split(',').map(Number);\n        const queries = lines.slice(1).map(line => line.split(',').map(Number));\n        console.log(getElements(arr, queries).join(','));\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "5,1,2,3,4,5,6,7,8,9,10\n1,1\n1,2\n2,1\n2,2",
+        "expectedOutput": "1,2,6,7"
+      },
+      {
+        "input": "3,10,20,30,40,50,60\n2,1",
+        "expectedOutput": "40"
+      },
+      {
+        "input": "2,1,2,3,4\n2,2\n1,1",
+        "expectedOutput": "4,1"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Is the Number Present?",
+    "description": "Problem Statement:\nFor each index i in an array, check if num[i] appears earlier in the array (String 1) and if it appears later in the array (String 2).\n\nInput Format:\nA single line of comma-separated integers.\n\nOutput Format:\nTwo lines. First line represents String 1 (1 if seen before, 0 otherwise). Second line represents String 2 (1 if seen later, 0 otherwise).\n\nSample Input:\n1, 2, 3, 2, 1\n\nSample Output:\n00011\n11000",
+    "difficulty": "Easy",
+    "starterCode": {
+      "python3": "def bit_pattern(num):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    text = sys.stdin.read().strip()\n    if text:\n        arr = [int(x.strip()) for x in text.split(',')]\n        res = bit_pattern(arr)\n        if res:\n            print(res[0])\n            print(res[1])\n",
+      "javascript": "function bitPattern(num) {\n    // Write your code here\n    return [\"\", \"\"];\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input && input.trim() !== '') {\n    const arr = input.split(',').map(Number);\n    const res = bitPattern(arr);\n    if (res && res.length === 2) {\n        console.log(res[0]);\n        console.log(res[1]);\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "1,2,3,2,1",
+        "expectedOutput": "00011\n11000"
+      },
+      {
+        "input": "1,1,1",
+        "expectedOutput": "011\n110"
+      },
+      {
+        "input": "1,2,3,4",
+        "expectedOutput": "0000\n0000"
+      },
+      {
+        "input": "5,5",
+        "expectedOutput": "01\n10"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Freelancing Platform (Minimum Bids)",
+    "description": "Problem Statement:\nAssign exactly one bid to each project such that the total cost is minimized. If a project receives no bids, return -1.\n\nInput Format:\nLine 1: numProjects\nLine 2: Comma-separated projectIds\nLine 3: Comma-separated bids\n\nOutput Format:\nThe minimum total cost, or -1 if all projects cannot be covered.\n\nSample Input:\n3\n2,0,1,2\n8,7,6,9\n\nSample Output:\n21\n\nExplanation:\nProject 0 gets 7, Project 1 gets 6, Project 2 gets 8. Total = 21.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def min_cost(numProjects, projectIds, bids):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 3:\n        n = int(lines[0].strip())\n        pids = [int(x.strip()) for x in lines[1].split(',')]\n        bids = [int(x.strip()) for x in lines[2].split(',')]\n        print(min_cost(n, pids, bids))\n",
+      "javascript": "function minCost(numProjects, projectIds, bids) {\n    // Write your code here\n    return -1;\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined') {\n    const lines = input.split('\\n').filter(l => l.trim() !== '');\n    if (lines.length >= 3) {\n        const n = Number(lines[0]);\n        const pids = lines[1].split(',').map(Number);\n        const bids = lines[2].split(',').map(Number);\n        console.log(minCost(n, pids, bids));\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "3\n2,0,1,2\n8,7,6,9",
+        "expectedOutput": "21"
+      },
+      {
+        "input": "4\n2,0,1,2\n8,7,6,9",
+        "expectedOutput": "-1"
+      },
+      {
+        "input": "2\n0,1,0,1\n10,10,5,5",
+        "expectedOutput": "10"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Process Scheduler (Core Allocation)",
+    "description": "Problem Statement:\nDetermine the minimum number of CPU cores required so that n processes (with inclusive start and end times) can run without conflict.\n\nInput Format:\nLine 1: Comma-separated start times\nLine 2: Comma-separated end times\n\nOutput Format:\nThe maximum number of overlapping cores needed at any time.\n\nSample Input:\n1,3,4\n3,5,6\n\nSample Output:\n2\n\nExplanation:\nProcess 1 ends at 3. Process 2 starts at 3. This is an inclusive overlap, so 2 cores are needed at time 3.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def get_min_cores(start, end):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        start = [int(x.strip()) for x in lines[0].split(',')]\n        end = [int(x.strip()) for x in lines[1].split(',')]\n        print(get_min_cores(start, end))\n",
+      "javascript": "function getMinCores(start, end) {\n    // Write your code here\n    return 0;\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined') {\n    const lines = input.split('\\n').filter(l => l.trim() !== '');\n    if (lines.length >= 2) {\n        const start = lines[0].split(',').map(Number);\n        const end = lines[1].split(',').map(Number);\n        console.log(getMinCores(start, end));\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "1,3,4\n3,5,6",
+        "expectedOutput": "2"
+      },
+      {
+        "input": "1,5\n2,6",
+        "expectedOutput": "1"
+      },
+      {
+        "input": "1,2,3\n5,6,7",
+        "expectedOutput": "3"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Shifting Strings",
+    "description": "Problem Statement:\nApply a given number of left shifts followed by right shifts to a string and return the final string. A shift moves characters circularly.\n\nInput Format:\nLine 1: String\nLine 2: Left shifts\nLine 3: Right shifts\n\nOutput Format:\nThe final shifted string.\n\nSample Input:\nabcdefg\n2\n4\n\nSample Output:\nfgabcde",
+    "difficulty": "Easy",
+    "starterCode": {
+      "python3": "def get_shifted_string(s, leftShifts, rightShifts):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 3:\n        s = lines[0]\n        l = int(lines[1].strip())\n        r = int(lines[2].strip())\n        print(get_shifted_string(s, l, r))\n",
+      "javascript": "function getShiftedString(s, leftShifts, rightShifts) {\n    // Write your code here\n    return \"\";\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined') {\n    const lines = input.split('\\n');\n    if (lines.length >= 3) {\n        console.log(getShiftedString(lines[0], Number(lines[1]), Number(lines[2])));\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "abcdefg\n2\n4",
+        "expectedOutput": "fgabcde"
+      },
+      {
+        "input": "abcd\n1\n2",
+        "expectedOutput": "dabc"
+      },
+      {
+        "input": "hello\n10\n10",
+        "expectedOutput": "hello"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Subarray MaxMin",
+    "description": "Problem Statement:\nFor every contiguous subarray of length k, find its minimum value. Return the maximum among these minimum values.\n\nInput Format:\nLine 1: Comma-separated array\nLine 2: Subarray length k\n\nOutput Format:\nThe maximum of all subarray minimums.\n\nSample Input:\n1, 2, 3, 4, 5\n2\n\nSample Output:\n4\n\nExplanation:\nThe subarrays of length 2 are [1,2], [2,3], [3,4], [4,5]. Their minimums are 1, 2, 3, 4. The maximum of these is 4.",
+    "difficulty": "Hard",
+    "starterCode": {
+      "python3": "def max_min(arr, k):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        arr = [int(x.strip()) for x in lines[0].split(',')]\n        k = int(lines[1].strip())\n        print(max_min(arr, k))\n",
+      "javascript": "function maxMin(arr, k) {\n    // Write your code here\n    return 0;\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined') {\n    const lines = input.split('\\n').filter(l => l.trim() !== '');\n    if (lines.length >= 2) {\n        const arr = lines[0].split(',').map(Number);\n        console.log(maxMin(arr, Number(lines[1])));\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "1,2,3,4,5\n2",
+        "expectedOutput": "4"
+      },
+      {
+        "input": "2,5,4,6,8\n3",
+        "expectedOutput": "4"
+      },
+      {
+        "input": "10,20,30\n1",
+        "expectedOutput": "30"
+      },
+      {
+        "input": "10,20,30\n3",
+        "expectedOutput": "10"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Arranging Coins",
+    "description": "Problem Statement:\nYou are given an array of coins, where each value represents the total coins available. You must build a staircase where each row contains one more coin than the row above it. Determine the maximum number of complete rows for each value.\n\nInput Format:\nComma-separated integers.\n\nOutput Format:\nComma-separated integers representing the maximum complete rows for each value.\n\nSample Input:\n6, 7, 8\n\nSample Output:\n3,3,3\n\nExplanation:\nA 3-row staircase needs 6 coins. 7 and 8 coins aren't enough for a 4th row, so the answer is 3 for all of them.",
+    "difficulty": "Easy",
+    "starterCode": {
+      "python3": "def arrange_coins(coins):\n    import math\n    res = []\n    for n in coins:\n        res.append(int((math.sqrt(1 + 8 * n) - 1) / 2))\n    return res\n\nif __name__ == '__main__':\n    import sys\n    text = sys.stdin.read().strip()\n    if text:\n        coins = [int(x.strip()) for x in text.split(',')]\n        print(\",\".join(map(str, arrange_coins(coins))))\n",
+      "javascript": "function arrangeCoins(coins) {\n    return coins.map(n => Math.floor((Math.sqrt(1 + 8 * n) - 1) / 2));\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input !== null && input.trim() !== '') {\n    const coins = input.split(',').map(Number);\n    console.log(arrangeCoins(coins).join(','));\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "6, 7, 8",
+        "expectedOutput": "3,3,3"
+      },
+      {
+        "input": "9",
+        "expectedOutput": "4"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Merge Magic / Array Reduction",
+    "description": "Problem Statement:\nYou must repeatedly merge two elements with values x and y until only one remains. The cost for each move is x+y. Determine the minimum total cost needed to finish the process.\n\nInput Format:\nComma-separated integers.\n\nOutput Format:\nThe minimum total cost.\n\nSample Input:\n20, 30, 40\n\nSample Output:\n140\n\nExplanation:\nMerge 20+30 (cost 50), then merge 50+40 (cost 90). Total: 140.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def min_power(cells):\n    import heapq\n    heapq.heapify(cells)\n    total_power = 0\n    while len(cells) > 1:\n        current_sum = heapq.heappop(cells) + heapq.heappop(cells)\n        total_power += current_sum\n        heapq.heappush(cells, current_sum)\n    return total_power\n\nif __name__ == '__main__':\n    import sys\n    text = sys.stdin.read().strip()\n    if text:\n        cells = [int(x.strip()) for x in text.split(',')]\n        print(min_power(cells))\n",
+      "javascript": "function minPower(cells) {\n    let totalPower = 0;\n    while (cells.length > 1) {\n        cells.sort((a,b) => a - b);\n        let sum = cells.shift() + cells.shift();\n        totalPower += sum;\n        cells.push(sum);\n    }\n    return totalPower;\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input !== null && input.trim() !== '') {\n    const cells = input.split(',').map(Number);\n    console.log(minPower(cells));\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "20, 30, 40",
+        "expectedOutput": "140"
+      },
+      {
+        "input": "4, 6, 8",
+        "expectedOutput": "28"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Subarray Sum",
+    "description": "Problem Statement:\nGiven an array of n integers, determine the sum of all elements across all possible contiguous subarrays.\n\nInput Format:\nComma-separated integers.\n\nOutput Format:\nThe total sum.\n\nSample Input:\n4, 5, 6\n\nSample Output:\n50\n\nExplanation:\nSubarrays: [4], [5], [6], [4,5], [5,6], [4,5,6]. Sum = 4 + 5 + 6 + 9 + 11 + 15 = 50.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def subarray_sum(arr):\n    n = len(arr)\n    total_sum = 0\n    for i in range(n):\n        total_sum += arr[i] * (i + 1) * (n - i)\n    return total_sum\n\nif __name__ == '__main__':\n    import sys\n    text = sys.stdin.read().strip()\n    if text:\n        arr = [int(x.strip()) for x in text.split(',')]\n        print(subarray_sum(arr))\n",
+      "javascript": "function subarraySum(arr) {\n    let n = arr.length;\n    let totalSum = 0;\n    for (let i = 0; i < n; i++) {\n        totalSum += arr[i] * (i + 1) * (n - i);\n    }\n    return totalSum;\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input !== null && input.trim() !== '') {\n    const arr = input.split(',').map(Number);\n    console.log(subarraySum(arr));\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "4, 5, 6",
+        "expectedOutput": "50"
+      },
+      {
+        "input": "1, 1, 1",
+        "expectedOutput": "10"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Extraordinary Substrings",
+    "description": "Problem Statement:\nEach lowercase letter is mapped to a digit 1-9 (e.g. a=1, b=1, c=2, etc. based on a standard 3x3 phone grid mapping). A substring is \"extraordinary\" if the sum of its mapped digit values is divisible by its length. Find how many such substrings exist.\n\nInput Format:\nA single string.\n\nOutput Format:\nThe number of extraordinary substrings.\n\nSample Input:\nasdf\n\nSample Output:\n6",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def count_extraordinary(input_str):\n    mapping = {\n        'a':1, 'b':1, 'c':2, 'd':2, 'e':2, 'f':3, 'g':3, 'h':3,\n        'i':4, 'j':4, 'k':4, 'l':5, 'm':5, 'n':5, 'o':6, 'p':6, 'q':6,\n        'r':7, 's':7, 't':7, 'u':8, 'v':8, 'w':8, 'x':9, 'y':9, 'z':9\n    }\n    count = 0\n    n = len(input_str)\n    for i in range(n):\n        current_sum = 0\n        for j in range(i, n):\n            current_sum += mapping[input_str[j]]\n            if current_sum % (j - i + 1) == 0:\n                count += 1\n    return count\n\nif __name__ == '__main__':\n    import sys\n    text = sys.stdin.read().strip()\n    if text:\n        print(count_extraordinary(text))\n",
+      "javascript": "function countExtraordinary(inputStr) {\n    const mapping = {\n        a:1, b:1, c:2, d:2, e:2, f:3, g:3, h:3,\n        i:4, j:4, k:4, l:5, m:5, n:5, o:6, p:6, q:6,\n        r:7, s:7, t:7, u:8, v:8, w:8, x:9, y:9, z:9\n    };\n    let count = 0;\n    let n = inputStr.length;\n    for (let i = 0; i < n; i++) {\n        let currentSum = 0;\n        for (let j = i; j < n; j++) {\n            currentSum += mapping[inputStr[j]];\n            if (currentSum % (j - i + 1) === 0) count++;\n        }\n    }\n    return count;\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input !== null) {\n    console.log(countExtraordinary(input.trim()));\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "asdf",
+        "expectedOutput": "6"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Maximum Substring",
+    "description": "Problem Statement:\nDetermine which substring of string s would appear last if all possible substrings were sorted alphabetically.\n\nInput Format:\nA single string s.\n\nOutput Format:\nThe maximum substring.\n\nSample Input:\nbaca\n\nSample Output:\nca\n\nExplanation:\nAmong all substrings, \"ca\" appears last alphabetically.",
+    "difficulty": "Easy",
+    "starterCode": {
+      "python3": "def max_substring(s):\n    max_sub = \"\"\n    for i in range(len(s)):\n        if s[i:] > max_sub:\n            max_sub = s[i:]\n    return max_sub\n\nif __name__ == '__main__':\n    import sys\n    s = sys.stdin.read().strip()\n    if s:\n        print(max_substring(s))\n",
+      "javascript": "function maxSubstring(s) {\n    let maxSub = \"\";\n    for (let i = 0; i < s.length; i++) {\n        let sub = s.slice(i);\n        if (sub > maxSub) {\n            maxSub = sub;\n        }\n    }\n    return maxSub;\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input !== null) {\n    console.log(maxSubstring(input.trim()));\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "baca",
+        "expectedOutput": "ca"
+      },
+      {
+        "input": "aaa",
+        "expectedOutput": "aaa"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Anagrams",
+    "description": "Problem Statement:\nSplit a digit-only string s of even length into two halves. Determine the minimum replacements needed in the first half to make it an anagram of the second half.\n\nInput Format:\nA single string s of even length.\n\nOutput Format:\nThe minimum replacements needed.\n\nSample Input:\n123212\n\nSample Output:\n1\n\nExplanation:\nFirst half \"123\", second \"212\". Change '3' to '2' to match. 1 replacement needed.",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def get_anagram(s):\n    from collections import Counter\n    n = len(s) // 2\n    first = s[:n]\n    second = s[n:]\n    counts = Counter(second)\n    for char in first:\n        if counts[char] > 0:\n            counts[char] -= 1\n    return sum(counts.values())\n\nif __name__ == '__main__':\n    import sys\n    s = sys.stdin.read().strip()\n    if s:\n        print(get_anagram(s))\n",
+      "javascript": "function getAnagram(s) {\n    let n = Math.floor(s.length / 2);\n    let first = s.slice(0, n);\n    let second = s.slice(n);\n    let counts = {};\n    for (let char of second) counts[char] = (counts[char] || 0) + 1;\n    for (let char of first) {\n        if (counts[char] > 0) counts[char]--;\n    }\n    return Object.values(counts).reduce((a, b) => a + b, 0);\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined' && input !== null) {\n    console.log(getAnagram(input.trim()));\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "123212",
+        "expectedOutput": "1"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Partitioning Array",
+    "description": "Problem Statement:\nDetermine if an array can be partitioned into subsequences of exactly k distinct elements such that every element appears in exactly one subsequence.\n\nInput Format:\nLine 1: integer k\nLine 2: Comma-separated integers\n\nOutput Format:\nYes or No\n\nSample Input:\n2\n1, 2, 3, 4\n\nSample Output:\nYes\n\nExplanation:\nCan be partitioned into [1, 2] and [3, 4].",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "def partition_array(k, numbers):\n    from collections import Counter\n    n = len(numbers)\n    if n % k != 0:\n        return \"No\"\n    groups = n // k\n    freq = Counter(numbers)\n    for count in freq.values():\n        if count > groups:\n            return \"No\"\n    return \"Yes\"\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        k = int(lines[0].strip())\n        numbers = [int(x.strip()) for x in lines[1].split(',')]\n        print(partition_array(k, numbers))\n",
+      "javascript": "function partitionArray(k, numbers) {\n    let n = numbers.length;\n    if (n % k !== 0) return \"No\";\n    let groups = n / k;\n    let freq = {};\n    for (let num of numbers) freq[num] = (freq[num] || 0) + 1;\n    for (let count of Object.values(freq)) {\n        if (count > groups) return \"No\";\n    }\n    return \"Yes\";\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined') {\n    const lines = input.split('\\n').filter(l => l.trim() !== '');\n    if (lines.length >= 2) {\n        const k = Number(lines[0]);\n        const numbers = lines[1].split(',').map(Number);\n        console.log(partitionArray(k, numbers));\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "2\n1, 2, 3, 4",
+        "expectedOutput": "Yes"
+      },
+      {
+        "input": "3\n4, 8, 8, 8, 6, 4",
+        "expectedOutput": "No"
+      }
+    ]
+  }
+]

@@ -48,6 +48,12 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: max-width 0.3s ease, height 0.3s ease;
+}
+
+.app-container.coding-mode {
+    max-width: 95vw;
+    height: 95vh;
 }
 
 .screen {
@@ -476,6 +482,86 @@ p {
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
+}
+
+/* Coding Screen */
+#coding-screen {
+    overflow-y: auto;
+}
+
+.coding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.coding-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    min-height: 0;
+}
+
+@media (min-width: 768px) {
+    .coding-layout {
+        flex-direction: row;
+    }
+    .coding-problem, .coding-editor-container {
+        flex: 1;
+        width: 50%;
+    }
+}
+
+.coding-problem {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    overflow-y: auto;
+    border: 1px solid var(--card-border);
+}
+
+.coding-editor-container {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.CodeMirror {
+    height: 100% !important;
+    min-height: 250px;
+    font-size: 14px;
+    font-family: 'Fira Code', monospace;
+}
+
+.coding-output-section {
+    margin-top: 1rem;
+}
+
+.terminal-box {
+    background: #000;
+    color: #0f0;
+    font-family: monospace;
+    padding: 1rem;
+    border-radius: 8px;
+    min-height: 100px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--card-border);
+    white-space: pre-wrap;
+    font-size: 0.9rem;
+}
+
+.terminal-box.error {
+    color: #fca5a5;
 }
 
 /* Responsive */

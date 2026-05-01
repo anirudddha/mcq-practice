@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCQ Practice Quiz</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -25,9 +28,10 @@
                         <option value="numpy_pandas_practice.json">Practice Test (Numpy Pandas)</option>
                     </select>
                 </div>
-                <div class="action-buttons">
+                <div class="action-buttons" style="flex-wrap: wrap;">
                     <button id="start-btn" class="primary-btn">Start Quiz</button>
                     <button id="view-btn" class="secondary-btn">View Questions</button>
+                    <button id="coding-practice-btn" class="primary-btn" style="width: 100%; margin-top: 10px; background: linear-gradient(90deg, #6366f1, #8b5cf6);">Coding Practice</button>
                 </div>
             </div>
         </div>
@@ -50,6 +54,40 @@
                     <!-- Options injected here -->
                 </div>
             </main>
+        </div>
+
+        <!-- Coding Screen -->
+        <div id="coding-screen" class="screen">
+            <div class="coding-header">
+                <button id="coding-back-btn" class="secondary-btn btn-small">Back</button>
+                <select id="question-select" class="test-dropdown" style="padding: 0.5rem; max-width: 250px; font-weight: bold; font-size: 1.1rem; background: rgba(0,0,0,0.3);">
+                    <option value="">Loading...</option>
+                </select>
+                <div class="coding-controls" style="display: flex; gap: 10px; align-items: center;">
+                    <select id="language-select" class="test-dropdown" style="padding: 0.5rem; width: auto;">
+                        <option value="python3">Python 3</option>
+                        <option value="javascript">JavaScript</option>
+                    </select>
+                    <button id="run-code-btn" class="primary-btn btn-small" style="padding: 0.5rem 1rem;">Run Code</button>
+                </div>
+            </div>
+
+            <div class="coding-layout">
+                <div class="coding-problem scrollable-area">
+                    <div class="badge" id="coding-difficulty" style="display:inline-block; margin-bottom:1rem;">Easy</div>
+                    <p id="coding-description" style="white-space: pre-wrap;">Loading description...</p>
+                </div>
+                <div class="coding-editor-container">
+                    <textarea id="code-editor"></textarea>
+                </div>
+            </div>
+            
+            <div class="coding-output-section">
+                <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--text-muted);">Output Terminal</h3>
+                <div id="coding-output-terminal" class="terminal-box">
+                    Ready to run...
+                </div>
+            </div>
         </div>
 
         <!-- Result Screen -->
@@ -86,6 +124,14 @@
     </div>
 
     <div class="signature">Powered by Aniruddha</div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
 
     <script src="app.js"></script>
 </body>
