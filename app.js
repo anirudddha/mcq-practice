@@ -55,7 +55,11 @@ const allQuestionsContainer = document.getElementById('all-questions-container')
 function init() {
     startBtn.addEventListener('click', () => handleStartAction('quiz'));
     viewBtn.addEventListener('click', () => handleStartAction('view'));
-    if (codingPracticeBtn) codingPracticeBtn.addEventListener('click', startCodingPractice);
+    
+    if (codingPracticeBtn) codingPracticeBtn.addEventListener('click', () => startCodingPractice('coding_questions.json'));
+    const apiPracticeBtn = document.getElementById('api-practice-btn');
+    if (apiPracticeBtn) apiPracticeBtn.addEventListener('click', () => startCodingPractice('api_questions.json'));
+    
     if (codingBackBtn) codingBackBtn.addEventListener('click', () => showScreen('start-screen'));
     
     if (languageSelect) {
@@ -283,9 +287,9 @@ function renderViewAll() {
     });
 }
 
-async function startCodingPractice() {
+async function startCodingPractice(filename = 'coding_questions.json') {
     try {
-        const response = await fetch('coding_questions.json');
+        const response = await fetch(filename);
         allCodingQuestions = await response.json();
         if(allCodingQuestions.length > 0) {
             if (questionSelect) {
@@ -338,6 +342,54 @@ function setEditorMode(lang) {
     else if(lang === 'javascript') codeMirrorEditor.setOption("mode", "javascript");
 }
 
+async function executeCode(code, language, input) {
+    let resultOutput = "";
+    let resultError = null;
+    
+    if (language === 'python3') {
+        try {
+            // Inject input securely
+            pyodideInstance.globals.set("test_input", input);
+            
+            pyodideInstance.runPython(`
+import sys
+import io
+sys.stdin = io.StringIO(test_input)
+sys.stdout = io.StringIO()
+sys.stderr = io.StringIO()
+            `);
+            
+            // Run code
+            pyodideInstance.runPython(code);
+            
+            resultOutput = pyodideInstance.runPython(`sys.stdout.getvalue()`);
+            const pyStderr = pyodideInstance.runPython(`sys.stderr.getvalue()`);
+            if (pyStderr) resultError = pyStderr;
+            
+        } catch (err) {
+            resultError = err.message;
+        }
+    } else if (language === 'javascript') {
+        let outputBuffer = "";
+        const mockConsole = {
+            log: (...args) => {
+                outputBuffer += args.join(" ") + "\n";
+            }
+        };
+        
+        try {
+            // Create isolated function environment
+            const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
+            const runJS = new AsyncFunction('input', 'console', code);
+            await runJS(input, mockConsole);
+            resultOutput = outputBuffer;
+        } catch (err) {
+            resultError = err.message;
+        }
+    }
+    return { output: resultOutput, error: resultError };
+}
+
 async function runCode() {
     runCodeBtn.disabled = true;
     runCodeBtn.innerText = "Running...";
@@ -365,58 +417,29 @@ async function runCode() {
         const tc = currentCodingQuestion.testCases[i];
         
         try {
-            let resultOutput = "";
-            let resultError = null;
+            // Check if we need to dynamically evaluate the expected output
+            let expectedOutput = tc.expectedOutput ? tc.expectedOutput.trim() : "";
             
-            if (language === 'python3') {
-                try {
-                    // Inject input securely
-                    pyodideInstance.globals.set("test_input", tc.input);
-                    
-                    pyodideInstance.runPython(`
-import sys
-import io
-sys.stdin = io.StringIO(test_input)
-sys.stdout = io.StringIO()
-sys.stderr = io.StringIO()
-                    `);
-                    
-                    // Run user code
-                    pyodideInstance.runPython(code);
-                    
-                    resultOutput = pyodideInstance.runPython(`sys.stdout.getvalue()`);
-                    const pyStderr = pyodideInstance.runPython(`sys.stderr.getvalue()`);
-                    if (pyStderr) resultError = pyStderr;
-                    
-                } catch (err) {
-                    resultError = err.message;
+            if (!expectedOutput && currentCodingQuestion.referenceCode && currentCodingQuestion.referenceCode[language]) {
+                const refRes = await executeCode(currentCodingQuestion.referenceCode[language], language, tc.input);
+                if (refRes.error) {
+                    outputText += `Test Case ${i+1}: ✗ Reference Code Error\n${refRes.error}\n\n`;
+                    passedAll = false;
+                    break;
                 }
-            } else if (language === 'javascript') {
-                let outputBuffer = "";
-                const mockConsole = {
-                    log: (...args) => {
-                        outputBuffer += args.join(" ") + "\n";
-                    }
-                };
-                
-                try {
-                    // Create isolated function environment
-                    const runJS = new Function('input', 'console', code);
-                    runJS(tc.input, mockConsole);
-                    resultOutput = outputBuffer;
-                } catch (err) {
-                    resultError = err.message;
-                }
+                expectedOutput = refRes.output ? refRes.output.trim() : "";
             }
 
-            if (resultError) {
-                outputText += `Test Case ${i+1}: ✗ Error\n${resultError}\n\n`;
+            // Execute user code
+            const userRes = await executeCode(code, language, tc.input);
+
+            if (userRes.error) {
+                outputText += `Test Case ${i+1}: ✗ Error\n${userRes.error}\n\n`;
                 passedAll = false;
                 break;
             }
 
-            const actualOutput = resultOutput ? resultOutput.trim() : "";
-            const expectedOutput = tc.expectedOutput ? tc.expectedOutput.trim() : "";
+            const actualOutput = userRes.output ? userRes.output.trim() : "";
 
             if (actualOutput === expectedOutput) {
                 outputText += `Test Case ${i+1}: ✓ Passed\n`;

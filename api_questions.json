@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "REST API: TV Shows Produced During a Period",
+    "description": "Problem Statement:\nUse the HTTP GET method to fetch information about recent TV shows. Query the endpoint `https://jsonmock.hackerrank.com/api/tvseries` to retrieve all records. The results are paginated and can be accessed by appending `?page=num` to the query string, where `num` is the page number.\n\nThe response is a JSON object containing the following fields:\n- `page`: current page of results (Number)\n- `per_page`: maximum number of results per page (Number)\n- `total`: total number of results (Number)\n- `total_pages`: total number of pages with results (Number)\n- `data`: an array of TV series records\n\nEach TV series in the `data` array has the following structure:\n- `name`: (String)\n- `runtime_of_series`: years the show is in production (String, e.g., \"(2011-2019)\", \"(2010- )\")\n- `certificate`: rating (String)\n- `runtime_of_episodes`: average length per episode in minutes (String)\n- `genre`: genre (String)\n- `imdb_rating`: average viewer rating (Number)\n\nGiven `startYear` and `endYear`, return an array of names of all TV shows that were in production for any subset of the years strictly within the `startYear` to `endYear` range (both inclusive). If `endYear` is -1, it represents shows that are currently running. Return the results sorted alphabetically.\n\nInput Format:\nLine 1: startYear\nLine 2: endYear\n\nOutput Format:\nComma-separated string of TV show names.\n\nSample Input:\n2010\n2015\n\nSample Output:\nDownton Abbey,Hannibal,Spartacus: Blood and Sand,Terra Nova,The Newsroom",
+    "difficulty": "Medium",
+    "starterCode": {
+      "python3": "import pyodide.http\nimport json\n\ndef shows_in_production(startYear, endYear):\n    # Write your code here\n    pass\n\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        startYear = int(lines[0].strip())\n        endYear = int(lines[1].strip())\n        res = shows_in_production(startYear, endYear)\n        if res:\n            print(','.join(res))\n",
+      "javascript": "async function showsInProduction(startYear, endYear) {\n    // Write your code here\n    return [];\n}\n\n// --- System Code (Do not modify) ---\nif (typeof input !== 'undefined') {\n    const lines = input.split('\\n').filter(l => l.trim() !== '');\n    if (lines.length >= 2) {\n        const res = await showsInProduction(Number(lines[0]), Number(lines[1]));\n        if (res && res.length) console.log(res.join(','));\n    }\n}\n"
+    },
+    "testCases": [
+      {
+        "input": "2010\n2015",
+        "expectedOutput": ""
+      },
+      {
+        "input": "2000\n2010",
+        "expectedOutput": ""
+      },
+      {
+        "input": "2015\n-1",
+        "expectedOutput": ""
+      },
+      {
+        "input": "2005\n2008",
+        "expectedOutput": ""
+      },
+      {
+        "input": "2018\n2019",
+        "expectedOutput": ""
+      }
+    ],
+    "referenceCode": {
+      "python3": "import pyodide.http\nimport json\ndef shows_in_production(startYear, endYear):\n    url = 'https://jsonmock.hackerrank.com/api/tvseries?page='\n    page = 1\n    totalp = 1\n    ans = []\n    while page <= totalp:\n        res = json.loads(pyodide.http.open_url(url + str(page)).read())\n        totalp = res['total_pages']\n        for d in res['data']:\n            a = d['runtime_of_series']\n            b = a.replace('(', '').replace(')', '').replace('II', '').replace('I', '').strip()\n            if '-' in b:\n                c = b.split('-')\n                start = int(c[0])\n                end = int(c[1]) if len(c)>1 and c[1].strip() else None\n            else:\n                start = int(b)\n                end = start\n            if start >= startYear:\n                if endYear == -1 and end is None:\n                    ans.append(d['name'])\n                elif end is not None and end <= endYear:\n                    ans.append(d['name'])\n        page += 1\n    return sorted(ans)\nif __name__ == '__main__':\n    import sys\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        startYear = int(lines[0].strip())\n        endYear = int(lines[1].strip())\n        res = shows_in_production(startYear, endYear)\n        if res:\n            print(','.join(res))",
+      "javascript": "async function showsInProduction(startYear, endYear) {\n    const url = 'https://jsonmock.hackerrank.com/api/tvseries?page=';\n    let page = 1; let totalp = 1;\n    let ans = [];\n    while(page <= totalp){\n        const res = await fetch(`${url}${page}`);\n        const result = await res.json();\n        totalp = result.total_pages;\n        for(let d of result.data){\n            let b = d.runtime_of_series.replaceAll('(', '').replaceAll(')', '').replaceAll('II', '').replaceAll('I', '').trim();\n            let start, end;\n            if(b.includes('-')){\n                let c = b.split('-');\n                start = Number(c[0]);\n                end = c[1] ? Number(c[1]) : null;\n            } else {\n                start = Number(b);\n                end = start;\n            }\n            if(start >= startYear){\n                if(endYear === -1 && end === null) ans.push(d.name);\n                else if(end !== null && end <= endYear) ans.push(d.name);\n            }\n        }\n        page++;\n    }\n    return ans.sort();\n}\nif (typeof input !== 'undefined') {\n    const lines = input.split('\\n').filter(l => l.trim() !== '');\n    if (lines.length >= 2) {\n        const res = await showsInProduction(Number(lines[0]), Number(lines[1]));\n        if (res && res.length) console.log(res.join(','));\n    }\n}"
+    }
+  }
+]
