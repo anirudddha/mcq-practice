@@ -100,6 +100,20 @@ body {
     }
 }
 
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loader {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+    display: inline-block;
+}
+
 /* Typography & General */
 h1 {
     font-size: 2.5rem;
@@ -486,64 +500,80 @@ p {
 
 /* Coding Screen */
 #coding-screen {
-    overflow-y: auto;
+    overflow: hidden; /* Prevent scrolling on the whole screen, rely on split panes */
 }
 
 .coding-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--card-border);
-    padding-bottom: 1rem;
     gap: 1rem;
     flex-wrap: wrap;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .coding-layout {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex: 1;
-    min-height: 0;
-}
-
-@media (min-width: 768px) {
-    .coding-layout {
-        flex-direction: row;
-    }
-    .coding-problem, .coding-editor-container {
-        flex: 1;
-        width: 50%;
-    }
+    flex-direction: row;
+    width: 100%;
 }
 
 .coding-problem {
     background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
     padding: 1rem;
     overflow-y: auto;
-    border: 1px solid var(--card-border);
 }
 
 .coding-editor-container {
-    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--card-border);
     display: flex;
     flex-direction: column;
-    flex: 1;
+    background: #282a36; /* Dracula bg */
 }
 
 .CodeMirror {
     height: 100% !important;
-    min-height: 250px;
     font-size: 14px;
     font-family: 'Fira Code', monospace;
 }
 
 .coding-output-section {
-    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+}
+
+/* Split.js Gutter Styles */
+.gutter {
+    background-color: #333;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+    cursor: col-resize;
+}
+
+.gutter.gutter-vertical {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyCB2iAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFBgIAAHjAPP/pL+QAAAABJRU5ErkJggg==');
+    cursor: row-resize;
+}
+
+/* Fullscreen Mode */
+.app-container.coding-mode.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: none;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+    z-index: 1000;
 }
 
 .terminal-box {

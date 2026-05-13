@@ -58,9 +58,12 @@
         </div>
 
         <!-- Coding Screen -->
-        <div id="coding-screen" class="screen">
-            <div class="coding-header">
-                <button id="coding-back-btn" class="secondary-btn btn-small">Back</button>
+        <div id="coding-screen" class="screen" style="padding: 0;">
+            <div class="coding-header" style="padding: 10px 20px; margin-bottom: 0;">
+                <div style="display: flex; gap: 10px;">
+                    <button id="coding-back-btn" class="secondary-btn btn-small" style="padding: 0.5rem 1rem;">Back</button>
+                    <button id="coding-fullscreen-btn" class="secondary-btn btn-small" style="padding: 0.5rem 1rem;">Full Screen</button>
+                </div>
                 <select id="question-select" class="test-dropdown" style="padding: 0.5rem; max-width: 250px; font-weight: bold; font-size: 1.1rem; background: rgba(0,0,0,0.3);">
                     <option value="">Loading...</option>
                 </select>
@@ -73,20 +76,24 @@
                 </div>
             </div>
 
-            <div class="coding-layout">
-                <div class="coding-problem scrollable-area">
+            <div id="split-main" class="coding-layout" style="height: calc(100% - 60px);">
+                <div id="split-left" class="coding-problem scrollable-area">
                     <div class="badge" id="coding-difficulty" style="display:inline-block; margin-bottom:1rem;">Easy</div>
                     <p id="coding-description" style="white-space: pre-wrap;">Loading description...</p>
                 </div>
-                <div class="coding-editor-container">
-                    <textarea id="code-editor"></textarea>
-                </div>
-            </div>
-            
-            <div class="coding-output-section">
-                <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--text-muted);">Output Terminal</h3>
-                <div id="coding-output-terminal" class="terminal-box">
-                    Ready to run...
+                <div id="split-right" style="display: flex; flex-direction: column;">
+                    <div id="split-top" class="coding-editor-container">
+                        <textarea id="code-editor"></textarea>
+                    </div>
+                    <div id="split-bottom" class="coding-output-section">
+                        <div style="padding: 0.5rem 1rem; background: #1e1b4b; border-bottom: 1px solid var(--card-border); color: var(--text-muted); font-size: 0.9rem; font-weight: 600; display: flex; align-items: center;">
+                            <span>Output Terminal</span>
+                            <span id="run-loader" class="loader" style="display: none; margin-left: 10px;"></span>
+                        </div>
+                        <div id="coding-output-terminal" class="terminal-box" style="border: none; border-radius: 0; min-height: 0;">
+                            Ready to run...
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,6 +140,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/closebrackets.min.js"></script>
+
+    <!-- Split.js for Resizable Panels -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.5/split.min.js"></script>
 
     <script src="app.js"></script>
 </body>

@@ -30,6 +30,11 @@ const codeEditorTextarea = document.getElementById('code-editor');
 let codeMirrorEditor = null;
 let currentCodingQuestion = null;
 
+let leftRightSplit = null;
+let topBottomSplit = null;
+const codingFullscreenBtn = document.getElementById('coding-fullscreen-btn');
+let isFullscreen = false;
+
 let pyodideInstance = null;
 
 async function initPyodide() {
@@ -61,6 +66,10 @@ function init() {
     if (apiPracticeBtn) apiPracticeBtn.addEventListener('click', () => startCodingPractice('api_questions.json'));
     
     if (codingBackBtn) codingBackBtn.addEventListener('click', () => showScreen('start-screen'));
+    
+    if (codingFullscreenBtn) {
+        codingFullscreenBtn.addEventListener('click', toggleFullscreen);
+    }
     
     if (languageSelect) {
         languageSelect.addEventListener('change', () => {
@@ -128,6 +137,22 @@ function showScreen(screenId) {
     if (screenId === 'result-screen') {
         document.getElementById(screenId).scrollTop = 0;
     }
+}
+
+function toggleFullscreen() {
+    const appContainer = document.querySelector('.app-container');
+    isFullscreen = !isFullscreen;
+    if (isFullscreen) {
+        appContainer.classList.add('fullscreen');
+        codingFullscreenBtn.innerText = "Exit Full Screen";
+    } else {
+        appContainer.classList.remove('fullscreen');
+        codingFullscreenBtn.innerText = "Full Screen";
+    }
+    // Refresh CodeMirror after animation
+    setTimeout(() => {
+        if (codeMirrorEditor) codeMirrorEditor.refresh();
+    }, 350);
 }
 
 async function handleStartAction(actionType) {
@@ -306,10 +331,32 @@ async function startCodingPractice(filename = 'coding_questions.json') {
             currentCodingQuestion = allCodingQuestions[0];
             showScreen('coding-screen');
             setupCodingScreen();
+            setupSplitPanes();
         }
     } catch (e) {
         console.error("Failed to load coding questions", e);
         alert("Failed to load coding questions.");
+    }
+}
+
+function setupSplitPanes() {
+    if (!leftRightSplit) {
+        setTimeout(() => {
+            leftRightSplit = Split(['#split-left', '#split-right'], {
+                sizes: [40, 60],
+                minSize: [300, 300],
+                gutterSize: 8,
+                onDragEnd: () => { if (codeMirrorEditor) codeMirrorEditor.refresh(); }
+            });
+            topBottomSplit = Split(['#split-top', '#split-bottom'], {
+                direction: 'vertical',
+                sizes: [70, 30],
+                minSize: [150, 100],
+                gutterSize: 8,
+                onDragEnd: () => { if (codeMirrorEditor) codeMirrorEditor.refresh(); }
+            });
+            if (codeMirrorEditor) codeMirrorEditor.refresh();
+        }, 100); // small delay to let display: flex apply
     }
 }
 
@@ -325,7 +372,8 @@ function setupCodingScreen() {
             theme: 'dracula',
             mode: 'python',
             indentUnit: 4,
-            matchBrackets: true
+            matchBrackets: true,
+            autoCloseBrackets: true
         });
     }
     
@@ -394,6 +442,10 @@ async function runCode() {
     runCodeBtn.disabled = true;
     runCodeBtn.innerText = "Running...";
     codingOutputTerminal.className = "terminal-box";
+    const runLoader = document.getElementById('run-loader');
+    if(runLoader) runLoader.style.display = 'inline-block';
+    
+    codingOutputTerminal.innerText = "Compiling and executing...\n";
 
     const code = codeMirrorEditor.getValue();
     const language = languageSelect.value;
@@ -409,12 +461,19 @@ async function runCode() {
             codingOutputTerminal.className = "terminal-box error";
             runCodeBtn.disabled = false;
             runCodeBtn.innerText = "Run Code";
+            if(runLoader) runLoader.style.display = 'none';
             return;
         }
     }
 
+    // Yield control back to the browser so it can render the spinner and text
+    await new Promise(resolve => setTimeout(resolve, 50));
+
     for (let i = 0; i < currentCodingQuestion.testCases.length; i++) {
         const tc = currentCodingQuestion.testCases[i];
+        
+        // Yield between test cases to keep the spinner animating
+        await new Promise(resolve => setTimeout(resolve, 50));
         
         try {
             // Check if we need to dynamically evaluate the expected output
@@ -465,6 +524,7 @@ async function runCode() {
     codingOutputTerminal.innerText = outputText;
     runCodeBtn.disabled = false;
     runCodeBtn.innerText = "Run Code";
+    if(runLoader) runLoader.style.display = 'none';
 }
 
 // Start app
